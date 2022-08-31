@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spacom/screens/home_screen/detials_order.dart';
 
 class Home_Shape extends StatefulWidget {
   const Home_Shape({Key? key}) : super(key: key);
@@ -54,15 +55,22 @@ class _Home_ShapeState extends State<Home_Shape> {
                         "24 Lessons",
                         style: TextStyle(fontSize: 15),
                       ),
-                      Text(
-                        "43",
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 2.0),
+                            child: Text(
+                              "43",
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Icon(
+                            Icons.star,
+                            color: Colors.blueAccent,
+                          )
+                        ],
                       ),
-                      Icon(
-                        Icons.star,
-                        color: Colors.blueAccent,
-                      )
                     ],
                   )),
               Positioned(
@@ -77,15 +85,21 @@ class _Home_ShapeState extends State<Home_Shape> {
                         style:
                             TextStyle(fontSize: 20, color: Color(0xff00b6f7)),
                       ),
-                      Card(
-                          color: Colors.blueAccent,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          child: Icon(
-                            Icons.add,
-                            color: Colors.white,
-                          ))
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => Detials_Order()));
+                        },
+                        child: Card(
+                            color: Colors.blueAccent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            child: Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            )),
+                      )
                     ],
                   )),
             ],

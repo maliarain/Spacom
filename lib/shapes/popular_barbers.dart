@@ -8,7 +8,7 @@ class Popular_Barbar extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Container(
-        height: 200,
+        height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
             color: Color(0xfff9fafc), borderRadius: BorderRadius.circular(10)),
@@ -32,7 +32,7 @@ class Popular_Barbar extends StatelessWidget {
                   Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
+                        padding: const EdgeInsets.only(right: 5.0),
                         child: Text(
                           "43",
                           style: TextStyle(
@@ -49,9 +49,15 @@ class Popular_Barbar extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 130,
-              width: double.infinity,
-              child: Image.asset("assets/images/fluttterbuddy.png"),
+              height: 100,
+              width: 100,
+              child: Image.asset(
+                "assets/images/fluttterbuddy.png",
+                fit: BoxFit.cover,
+                height: double.infinity,
+                width: double.infinity,
+                alignment: Alignment.center,
+              ),
             ),
           ]),
         ),

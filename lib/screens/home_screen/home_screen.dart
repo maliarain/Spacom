@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:spacom/screens/home_screen/detials_order.dart';
 import 'package:spacom/shapes/home_shape.dart';
 import 'package:spacom/shapes/popular_barbers.dart';
 
@@ -66,7 +67,7 @@ class _Home_ScreenState extends State<Home_Screen> {
                 ),
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(20),
               child: const Text(
                 "Category",
@@ -74,53 +75,109 @@ class _Home_ScreenState extends State<Home_Screen> {
                     const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: const Text(
-                      'Barbars',
-                      style: const TextStyle(fontSize: 20),
+            Padding(
+              padding: const EdgeInsets.all(15),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                          border: Border.all(
+                            width: 3,
+                            color: Colors.blueAccent,
+                            style: BorderStyle.solid,
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Hair Cut",
+                              style: TextStyle(
+                                  color: Colors.blueAccent,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                  style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
-                              side: const BorderSide(color: Colors.grey)))),
+                    Expanded(
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(40),
+                          ),
+                          border: Border.all(
+                            width: 3,
+                            color: Colors.blueAccent,
+                            style: BorderStyle.solid,
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Spa",
+                              style: TextStyle(
+                                  color: Colors.blueAccent,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(40),
+                          ),
+                          border: Border.all(
+                            width: 3,
+                            color: Colors.blueAccent,
+                            style: BorderStyle.solid,
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Massage",
+                              style: TextStyle(
+                                  color: Colors.blueAccent,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                FlatButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                    side: const BorderSide(color: Colors.blueAccent),
-                  ),
-                  onPressed: () {},
-                  child: const Text(
-                    "Hair Style",
-                    style: TextStyle(color: Colors.blueAccent),
-                  ),
-                ),
-                FlatButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                    side: const BorderSide(color: Colors.blueAccent),
-                  ),
-                  onPressed: () {},
-                  child: const Text(
-                    "Spa",
-                    style: const TextStyle(color: Colors.blueAccent),
-                  ),
-                ),
-              ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: SizedBox(
                 width: double.infinity,
-                height: 180,
+                height: 160,
                 child: ListView.builder(
                   itemCount: 3,
                   scrollDirection: Axis.horizontal,
@@ -138,12 +195,15 @@ class _Home_ScreenState extends State<Home_Screen> {
                     const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
             ),
-            GridView.count(
-              crossAxisCount: 2,
-              children: List.generate(2, (index) {
-                return const Popular_Barbar();
-              }),
-            ),
+            SizedBox(
+                height: 200,
+                width: double.infinity,
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  children: List.generate(4, (index) {
+                    return const Popular_Barbar();
+                  }),
+                )),
           ],
         ),
       ),
