@@ -34,9 +34,9 @@ class _Favourite_ShapeState extends State<Favourite_Shape> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Barbar Name Here",
-                        style:
-                            TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        "Notification",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         "Barbar work experience and things",

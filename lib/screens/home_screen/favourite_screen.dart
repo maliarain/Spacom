@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spacom/shapes/favourite_shape.dart';
+import 'package:spacom/shapes/notification_shape.dart';
 
 class Favourite_Screen extends StatefulWidget {
   const Favourite_Screen({Key? key}) : super(key: key);

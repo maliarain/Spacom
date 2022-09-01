@@ -94,7 +94,7 @@ class _Home_ScreenState extends State<Home_Screen> {
                               Radius.circular(40),
                             ),
                             border: Border.all(
-                              width: 3,
+                              width: 1,
                               color: Colors.blueAccent,
                               style: BorderStyle.solid,
                             ),
@@ -116,7 +116,8 @@ class _Home_ScreenState extends State<Home_Screen> {
                     ),
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 15),
+                        padding:
+                            const EdgeInsets.only(top: 15, left: 5, right: 5),
                         child: Container(
                           alignment: Alignment.center,
                           width: MediaQuery.of(context).size.width,
@@ -126,7 +127,7 @@ class _Home_ScreenState extends State<Home_Screen> {
                               Radius.circular(40),
                             ),
                             border: Border.all(
-                              width: 3,
+                              width: 1,
                               color: Colors.blueAccent,
                               style: BorderStyle.solid,
                             ),
@@ -135,7 +136,7 @@ class _Home_ScreenState extends State<Home_Screen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Spa",
+                                "Face Facial",
                                 style: TextStyle(
                                     color: Colors.blueAccent,
                                     fontSize: 15,
@@ -158,7 +159,7 @@ class _Home_ScreenState extends State<Home_Screen> {
                               Radius.circular(40),
                             ),
                             border: Border.all(
-                              width: 3,
+                              width: 1,
                               color: Colors.blueAccent,
                               style: BorderStyle.solid,
                             ),
