@@ -44,7 +44,8 @@ class _Profile_ScreenState extends State<Profile_Screen> {
               // App_Things.getProfileButtions(Icons.history, "Purchase History"),
               // App_Things.getProfileButtions(
               //     Icons.help_outline, "Help & Support"),
-              // App_Things.getProfileButtions(Icons.settings, "Settings"),
+              App_Things.getProfileButtions(
+                  Icons.settings, "Settings", _clicked),
               // App_Things.getProfileButtions(
               //     Icons.person_add_alt_outlined, "Invite a Friend"),
               // App_Things.getProfileButtions(Icons.logout, "Logout"),
@@ -101,7 +102,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
               ),
               GestureDetector(
                 onTap: () async {
-                  await Share.share("Share");
+                  await Share.share("App Link Share");
                 },
                 child: Card(
                   shadowColor: Colors.black,
@@ -277,6 +278,15 @@ class _Profile_ScreenState extends State<Profile_Screen> {
         ),
       ),
     );
+  }
+
+  _clicked() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      const snackBar = SnackBar(
+        content: Text('Yay! A SnackBar!'),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    });
   }
 
   Future<void> _showMyDialog(

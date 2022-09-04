@@ -5,57 +5,61 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 
 abstract class App_Things extends StatelessWidget {
-  static Card getProfileButtions(
+  static GestureDetector getProfileButtions(
     IconData icon,
     String txt,
+    Function click,
   ) {
-    return Card(
-      shadowColor: Colors.black,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Row(
+    return GestureDetector(
+      onTap: () {
+        click;
+      },
+      child: Card(
+        shadowColor: Colors.black,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Icon(icon, color: Colors.blueAccent, size: 40),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Text(txt, style: TextStyle(fontSize: 20)),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Icon(icon,color: Colors.blueAccent,size: 40),
+                  padding: const EdgeInsets.only(right: 15),
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.blueAccent,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15),
-                  child: Text(txt,
-                      style:
-                          TextStyle(fontSize: 20)),
-                ),
               ],
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 15),
-                child: Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.blueAccent,
-                ),
-              ),
-            ],
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
 
   static TextField getInputTextField(
-      Icon icon,
-      String txt,
-      ) {
+    Icon icon,
+    String txt,
+  ) {
     return TextField(
       decoration: InputDecoration(
         filled: true,
@@ -72,17 +76,20 @@ abstract class App_Things extends StatelessWidget {
   }
 
   static Row getTitlesforHomeScreen(
-      String txtq,txt2,
-      ) {
+    String txtq,
+    txt2,
+  ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(txtq,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-        Text(txt2,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+        Text(
+          txtq,
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        Text(txt2, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
       ],
     );
   }
-
 }
 
 class App_Colors_Here {
