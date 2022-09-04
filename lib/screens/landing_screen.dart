@@ -41,7 +41,7 @@ class _Main_ScreenState extends State<Main_Screen> {
           key: _bottomNavigationKey,
           index: 0,
           height: 60.0,
-          backgroundColor: Colors.blueGrey,
+          backgroundColor: Colors.transparent,
           items: <Widget>[
             Icon(
               Icons.home_outlined,
@@ -59,7 +59,7 @@ class _Main_ScreenState extends State<Main_Screen> {
               color: Colors.white,
             ),
             Icon(
-              Icons.favorite_border,
+              Icons.notification_add,
               size: 30,
               color: Colors.white,
             ),
@@ -69,8 +69,8 @@ class _Main_ScreenState extends State<Main_Screen> {
               color: Colors.white,
             ),
           ],
-          color: Color(0xFF273A48),
-          buttonBackgroundColor: Colors.cyan,
+          color: Colors.blueAccent,
+          buttonBackgroundColor: Colors.blueAccent,
           animationCurve: Curves.easeInOut,
           animationDuration: Duration(milliseconds: 600),
           onTap: _onItemTapped,

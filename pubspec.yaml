@@ -35,12 +35,15 @@ dependencies:
   curved_navigation_bar: ^1.0.3
   line_awesome_flutter: ^1.0.1
   flutter_screenutil: ^1.0.2
+  flutter_email_sender: ^5.1.0
+  share_plus: ^4.0.10+1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-
+  flutter_widgets:  ^0.1.8
+  
 flutter:
 
   # The following line ensures that the Material Icons font is

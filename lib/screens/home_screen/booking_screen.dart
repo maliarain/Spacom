@@ -11,51 +11,62 @@ class Booking_Screen extends StatefulWidget {
 class _Booking_ScreenState extends State<Booking_Screen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Book an Appointment"),backgroundColor: Color(0xFF273A48),automaticallyImplyLeading: false,),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 130,
-                  width: 130,
-                  child: CircleAvatar(
-                    radius: 100,
-                    backgroundImage: AssetImage('assets/images/barbar.jpg'),
+    return DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            bottom: TabBar(
+                unselectedLabelColor: Colors.blueAccent,
+                indicatorSize: TabBarIndicatorSize.label,
+                indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: Colors.blueAccent),
+                tabs: [
+                  Tab(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          border:
+                              Border.all(color: Colors.blueAccent, width: 1)),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text("Booked"),
+                      ),
+                    ),
                   ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Enter Barbar Shop",style: TextStyle(fontSize: 20),),
+                  Tab(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          border:
+                              Border.all(color: Colors.blueAccent, width: 1)),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text("Recent"),
+                      ),
                     ),
-                    App_Things.getInputTextField(Icon(Icons.access_alarm,color: Colors.white,), "txt"),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Enter Description about Appointment",style: TextStyle(fontSize: 20),),
+                  ),
+                  Tab(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          border:
+                              Border.all(color: Colors.blueAccent, width: 1)),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text("Completed"),
+                      ),
                     ),
-                    App_Things.getInputTextField(Icon(Icons.access_alarm,color: Colors.white,), "txt"),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Enter Reason of Appointment",style: TextStyle(fontSize: 20),),
-                    ),
-                    App_Things.getInputTextField(Icon(Icons.access_alarm,color: Colors.white,), "txt"),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child: App_Things.getProfileButtions(Icons.bookmark_added_outlined, "Click for Booking"),
-                    )
-                  ],
-                )
-              ],
-            ),
+                  ),
+                ]),
           ),
-        ],
-      ),
-    );
+          body: TabBarView(children: [
+            Icon(Icons.apps),
+            Icon(Icons.movie),
+            Icon(Icons.games),
+          ]),
+        ));
   }
 }
