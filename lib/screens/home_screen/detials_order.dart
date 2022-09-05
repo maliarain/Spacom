@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spacom/screens/landing_screen.dart';
 
 class Detials_Order extends StatefulWidget {
   const Detials_Order({Key? key}) : super(key: key);
@@ -60,100 +61,113 @@ class _Detials_OrderState extends State<Detials_Order> {
                         ],
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Container(
-                            alignment: Alignment.center,
-                            width: 100,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(40),
-                              ),
-                              border: Border.all(
-                                width: 3,
-                                color: Colors.blueAccent,
-                                style: BorderStyle.solid,
-                              ),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Hair Cut",
-                                  style: TextStyle(
+                    Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 15),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(40),
+                                    ),
+                                    border: Border.all(
+                                      width: 1,
                                       color: Colors.blueAccent,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
+                                      style: BorderStyle.solid,
+                                    ),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "20\$",
+                                        style: TextStyle(
+                                            color: Colors.blueAccent,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Container(
-                            alignment: Alignment.center,
-                            width: 100,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(40),
-                              ),
-                              border: Border.all(
-                                width: 3,
-                                color: Colors.blueAccent,
-                                style: BorderStyle.solid,
                               ),
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "2 Hour",
-                                  style: TextStyle(
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 15, left: 5, right: 5),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(40),
+                                    ),
+                                    border: Border.all(
+                                      width: 1,
                                       color: Colors.blueAccent,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
+                                      style: BorderStyle.solid,
+                                    ),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "2 Hours",
+                                        style: TextStyle(
+                                            color: Colors.blueAccent,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Container(
-                            alignment: Alignment.center,
-                            width: 100,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(40),
-                              ),
-                              border: Border.all(
-                                width: 3,
-                                color: Colors.blueAccent,
-                                style: BorderStyle.solid,
                               ),
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "1 Seat",
-                                  style: TextStyle(
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 15),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(40),
+                                    ),
+                                    border: Border.all(
+                                      width: 1,
                                       color: Colors.blueAccent,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
+                                      style: BorderStyle.solid,
+                                    ),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Massage",
+                                        style: TextStyle(
+                                            color: Colors.blueAccent,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 15),
@@ -168,7 +182,10 @@ class _Detials_OrderState extends State<Detials_Order> {
                           Padding(
                             padding: const EdgeInsets.only(right: 5),
                             child: ElevatedButton(
-                              onPressed: () => 'Null',
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => Main_Screen()));
+                              },
                               style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all(
                                       Colors.blueAccent)),

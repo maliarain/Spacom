@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spacom/screens/home_screen/detials_order.dart';
 import 'package:spacom/utils/Things_We_Want.dart';
 
 class Booked_Shape extends StatefulWidget {
@@ -45,7 +46,10 @@ class _Booked_ShapeState extends State<Booked_Shape> {
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.redAccent),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => Detials_Order()));
+                },
                 child: Text("Cancel"),
               ),
             ),

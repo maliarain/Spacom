@@ -15,7 +15,7 @@ class Popular_Barbar extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(10),
           child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
             Text(
               "Hair Cut Shop",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -49,11 +49,11 @@ class Popular_Barbar extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 100,
-              width: 100,
+              height: 125,
+              width: double.infinity,
               child: Image.asset(
-                "assets/images/fluttterbuddy.png",
-                fit: BoxFit.cover,
+                "assets/images/barbar.jpg",
+                fit: BoxFit.fill,
                 height: double.infinity,
                 width: double.infinity,
                 alignment: Alignment.center,
