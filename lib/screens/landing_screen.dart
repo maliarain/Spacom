@@ -2,7 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'home_screen/booking_screen.dart';
-import 'home_screen/favourite_screen.dart';
+import 'home_screen/notification.dart';
 import 'home_screen/home_screen.dart';
 import 'home_screen/location_screen.dart';
 import 'home_screen/profile.dart';

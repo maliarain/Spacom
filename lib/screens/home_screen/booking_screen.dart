@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:spacom/shapes/booked.dart';
+import 'package:spacom/shapes/completed.dart';
+import 'package:spacom/shapes/notification_shape.dart';
+import 'package:spacom/shapes/recent.dart';
 import 'package:spacom/utils/Things_We_Want.dart';
 
 class Booking_Screen extends StatefulWidget {
@@ -12,9 +16,15 @@ class _Booking_ScreenState extends State<Booking_Screen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 3,
+        length: 2,
         child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: Text(
+              "Bookings Category",
+              style: TextStyle(color: Colors.blueAccent),
+            ),
+            centerTitle: true,
             backgroundColor: Colors.white,
             elevation: 0,
             bottom: TabBar(
@@ -44,18 +54,6 @@ class _Booking_ScreenState extends State<Booking_Screen> {
                               Border.all(color: Colors.blueAccent, width: 1)),
                       child: Align(
                         alignment: Alignment.center,
-                        child: Text("Recent"),
-                      ),
-                    ),
-                  ),
-                  Tab(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          border:
-                              Border.all(color: Colors.blueAccent, width: 1)),
-                      child: Align(
-                        alignment: Alignment.center,
                         child: Text("Completed"),
                       ),
                     ),
@@ -63,9 +61,18 @@ class _Booking_ScreenState extends State<Booking_Screen> {
                 ]),
           ),
           body: TabBarView(children: [
-            Icon(Icons.apps),
-            Icon(Icons.movie),
-            Icon(Icons.games),
+            GridView.count(
+              crossAxisCount: 2,
+              children: List.generate(8, (index) {
+                return Booked_Shape();
+              }),
+            ),
+            GridView.count(
+              crossAxisCount: 2,
+              children: List.generate(8, (index) {
+                return Completed_Shape();
+              }),
+            ),
           ]),
         ));
   }
