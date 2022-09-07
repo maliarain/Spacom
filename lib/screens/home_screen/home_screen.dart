@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:spacom/screens/home_screen/detials_order.dart';
 import 'package:spacom/shapes/home_shape.dart';
 import 'package:spacom/shapes/popular_barbers.dart';
+import 'package:spacom/user/auth_screen.dart';
 
 class Home_Screen extends StatefulWidget {
   const Home_Screen({Key? key}) : super(key: key);
@@ -39,12 +40,18 @@ class _Home_ScreenState extends State<Home_Screen> {
                       )
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: SizedBox(
-                      height: 50,
-                      width: 50,
-                      child: Image.asset("assets/images/profileicon.png"),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => LoginSignupScreen()));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: SizedBox(
+                        height: 50,
+                        width: 50,
+                        child: Image.asset("assets/images/profileicon.png"),
+                      ),
                     ),
                   )
                 ],

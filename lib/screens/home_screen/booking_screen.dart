@@ -61,17 +61,17 @@ class _Booking_ScreenState extends State<Booking_Screen> {
                 ]),
           ),
           body: TabBarView(children: [
-            GridView.count(
-              crossAxisCount: 2,
-              children: List.generate(8, (index) {
-                return Booked_Shape();
-              }),
+            ListView.builder(
+              itemCount: 6,
+              itemBuilder: (BuildContext context, int index) {
+                return const Booked_Shape();
+              },
             ),
-            GridView.count(
-              crossAxisCount: 2,
-              children: List.generate(8, (index) {
-                return Completed_Shape();
-              }),
+            ListView.builder(
+              itemCount: 6,
+              itemBuilder: (BuildContext context, int index) {
+                return const Completed_Shape();
+              },
             ),
           ]),
         ));

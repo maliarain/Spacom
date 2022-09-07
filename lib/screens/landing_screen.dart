@@ -48,7 +48,7 @@ class _Main_ScreenState extends State<Main_Screen> {
               color: Colors.white,
             ),
             Icon(
-              Icons.location_on_outlined,
+              Icons.message_outlined,
               size: 30,
               color: Colors.white,
             ),
