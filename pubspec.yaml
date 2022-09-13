@@ -36,8 +36,11 @@ dependencies:
   line_awesome_flutter: ^1.0.1
   flutter_screenutil: ^1.0.2
   flutter_email_sender: ^5.1.0
-  share_plus: ^4.0.10+1
+  share_plus: ^4.1.0
   settings_ui: ^2.0.2
+  firebase_auth: ^3.8.0
+  firebase_core: ^1.22.0
+  
 
 dev_dependencies:
   flutter_test:
@@ -46,7 +49,6 @@ dev_dependencies:
   flutter_widgets:  ^0.1.8
   
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

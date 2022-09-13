@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "646181345117",
+    "project_id": "spacom-f196e",
+    "storage_bucket": "spacom-f196e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646181345117:android:22e9b96039fe66f39bbab4",
+        "android_client_info": {
+          "package_name": "com.spa.spacom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "646181345117-ata6tifngeg81sc1ps1ehqjo27rt4v9m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.spa.spacom",
+            "certificate_hash": "b8dbd00c36ce1bbb0a7132067ff6edab3c88595b"
+          }
+        },
+        {
+          "client_id": "646181345117-guk77u6vvjdq3aaum0ql7c2do7nilntj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqVEGWlAyrwXT_g0Pu-C3U6nKDLUeI8QM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "646181345117-guk77u6vvjdq3aaum0ql7c2do7nilntj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

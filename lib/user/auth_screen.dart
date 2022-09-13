@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:spacom/screens/landing_screen.dart';
 import '../utils/Things_We_Want.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginSignupScreen extends StatefulWidget {
   @override
@@ -11,6 +13,8 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
   bool isSignupScreen = true;
   bool isMale = true;
   bool isRememberMe = false;
+
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +36,13 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                   children: [
                     RichText(
                       text: TextSpan(
-                          text: "Welcome to SPA",
-                          style: TextStyle(
-                            fontSize: 25,
-                            letterSpacing: 2,
-                            color: Colors.yellow[700],
-                          ),),
+                        text: "Welcome to SPA",
+                        style: TextStyle(
+                          fontSize: 25,
+                          letterSpacing: 2,
+                          color: Colors.yellow[700],
+                        ),
+                      ),
                     ),
                     SizedBox(
                       height: 5,
@@ -162,10 +167,10 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      buildTextButton(Icons.facebook_outlined,
-                          "Facebook", App_Colors_Here.facebookColor),
-                      buildTextButton(Icons.account_circle_outlined,
-                          "Google", App_Colors_Here.googleColor),
+                      buildTextButton(Icons.facebook_outlined, "Facebook",
+                          App_Colors_Here.facebookColor),
+                      buildTextButton(Icons.account_circle_outlined, "Google",
+                          App_Colors_Here.googleColor),
                     ],
                   ),
                 )
@@ -183,8 +188,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
       child: Column(
         children: [
           buildTextField(Icons.mail_outline, "info@demouri.com", false, true),
-          buildTextField(
-              Icons.lock_outline, "**********", true, false),
+          buildTextField(Icons.lock_outline, "**********", true, false),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -200,13 +204,15 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                     },
                   ),
                   Text("Remember me",
-                      style: TextStyle(fontSize: 12, color: App_Colors_Here.textColor1))
+                      style: TextStyle(
+                          fontSize: 12, color: App_Colors_Here.textColor1))
                 ],
               ),
               TextButton(
                 onPressed: () {},
                 child: Text("Forgot Password?",
-                    style: TextStyle(fontSize: 12, color: App_Colors_Here.textColor1)),
+                    style: TextStyle(
+                        fontSize: 12, color: App_Colors_Here.textColor1)),
               )
             ],
           )
@@ -223,8 +229,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
           buildTextField(
               Icons.account_circle_outlined, "User Name", false, false),
           buildTextField(Icons.email_outlined, "email", false, true),
-          buildTextField(
-              Icons.lock_outline, "password", true, false),
+          buildTextField(Icons.lock_outline, "password", true, false),
           Padding(
             padding: const EdgeInsets.only(top: 10, left: 10),
             child: Row(
@@ -253,7 +258,8 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                             borderRadius: BorderRadius.circular(15)),
                         child: Icon(
                           Icons.account_circle_outlined,
-                          color: isMale ? Colors.white : App_Colors_Here.iconColor,
+                          color:
+                              isMale ? Colors.white : App_Colors_Here.iconColor,
                         ),
                       ),
                       Text(
@@ -290,7 +296,8 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                             borderRadius: BorderRadius.circular(15)),
                         child: Icon(
                           Icons.account_circle_outlined,
-                          color: isMale ? App_Colors_Here.iconColor : Colors.white,
+                          color:
+                              isMale ? App_Colors_Here.iconColor : Colors.white,
                         ),
                       ),
                       Text(
@@ -391,7 +398,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                             offset: Offset(0, 1))
                       ]),
                   child: GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => Main_Screen()),
