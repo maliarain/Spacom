@@ -1,8 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:provider/provider.dart';
 import 'package:spacom/screens/landing_screen.dart';
+import 'package:spacom/utils/email_pass_signin.dart';
+import 'package:spacom/utils/google_sign_in.dart';
 import '../utils/Things_We_Want.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class LoginSignupScreen extends StatefulWidget {
   @override
@@ -14,7 +19,15 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
   bool isMale = true;
   bool isRememberMe = false;
 
-  FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Map? _userData;
+
+  final signun_email_controller = TextEditingController();
+  final signun_pass_controller = TextEditingController();
+  final signun_username_controller = TextEditingController();
+  final signin_email_controller = TextEditingController();
+  final signin_pass_controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -187,8 +200,10 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
       margin: EdgeInsets.only(top: 20),
       child: Column(
         children: [
-          buildTextField(Icons.mail_outline, "info@demouri.com", false, true),
-          buildTextField(Icons.lock_outline, "**********", true, false),
+          buildTextField(Icons.mail_outline, "info@demouri.com", false, true,
+              signin_email_controller),
+          buildTextField(Icons.lock_outline, "**********", true, false,
+              signin_pass_controller),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -226,10 +241,12 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
       margin: EdgeInsets.only(top: 20),
       child: Column(
         children: [
-          buildTextField(
-              Icons.account_circle_outlined, "User Name", false, false),
-          buildTextField(Icons.email_outlined, "email", false, true),
-          buildTextField(Icons.lock_outline, "password", true, false),
+          buildTextField(Icons.account_circle_outlined, "User Name", false,
+              false, signun_username_controller),
+          buildTextField(Icons.email_outlined, "email", false, true,
+              signun_email_controller),
+          buildTextField(Icons.lock_outline, "password", true, false,
+              signun_pass_controller),
           Padding(
             padding: const EdgeInsets.only(top: 10, left: 10),
             child: Row(
@@ -335,7 +352,27 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
   TextButton buildTextButton(
       IconData icon, String title, Color backgroundColor) {
     return TextButton(
-      onPressed: () {},
+      onPressed: () async {
+// Google Sign In Method Here............
+
+        // final provider =
+        //     Provider.of<GoogleSignInProvider>(context, listen: false);
+        // provider.googleSignin();
+
+//Facebook Sign IN Method Here .......................
+        // final result = await FacebookAuth.i
+        //     .login(permissions: ["public_profile", "email"]);
+
+        // if (result.status == LoginStatus.success) {
+        //   final userData = await FacebookAuth.i.getUserData(
+        //     fields: "email,name",
+        //   );
+
+        //   setState(() {
+        //     _userData = userData;
+        //   });
+        // }
+      },
       style: TextButton.styleFrom(
           side: BorderSide(width: 1, color: Colors.grey),
           minimumSize: Size(145, 40),
@@ -399,10 +436,49 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                       ]),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Main_Screen()),
-                      );
+                      //SignUP Method Here
+
+                      // AuthenticationHelper()
+                      //     .signUp(
+                      //         email: signun_email_controller.text,
+                      //         password: signun_pass_controller.text)
+                      //     .then((result) {
+                      //   if (result == null) {
+                      //     Navigator.pushReplacement(
+                      //         context,
+                      //         MaterialPageRoute(
+                      //             builder: (context) => Main_Screen()));
+                      //   } else {
+                      //     Scaffold.of(context).showSnackBar(SnackBar(
+                      //       content: Text(
+                      //         result,
+                      //         style: TextStyle(fontSize: 16),
+                      //       ),
+                      //     ));
+                      //   }
+                      // });
+
+                      //Login Method Here
+
+                      // AuthenticationHelper()
+                      //     .signIn(
+                      //         email: signin_email_controller.text,
+                      //         password: signin_pass_controller.text)
+                      //     .then((result) {
+                      //   if (result == null) {
+                      //     Navigator.pushReplacement(
+                      //         context,
+                      //         MaterialPageRoute(
+                      //             builder: (context) => Main_Screen()));
+                      //   } else {
+                      //     Scaffold.of(context).showSnackBar(SnackBar(
+                      //       content: Text(
+                      //         result,
+                      //         style: TextStyle(fontSize: 16),
+                      //       ),
+                      //     ));
+                      //   }
+                      // });
                     },
                     child: Icon(
                       Icons.arrow_forward,
@@ -416,11 +492,12 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
     );
   }
 
-  Widget buildTextField(
-      IconData icon, String hintText, bool isPassword, bool isEmail) {
+  Widget buildTextField(IconData icon, String hintText, bool isPassword,
+      bool isEmail, TextEditingController controller) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: TextField(
+        controller: controller,
         obscureText: isPassword,
         keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
         decoration: InputDecoration(
