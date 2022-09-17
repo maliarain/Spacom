@@ -31,14 +31,25 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                 height: 130,
                 width: 130,
                 child: CircleAvatar(
-                  radius: 100,
-                  backgroundImage: NetworkImage(user.photoURL!),
-                ),
+                    radius: 100,
+                    backgroundImage: (() {
+                      if (user == null) {
+                        Image.asset("assets/images/barbar.jpg");
+                      } else {
+                        NetworkImage(user.photoURL!);
+                      }
+                    }())),
               ),
               Padding(
                 padding: const EdgeInsets.all(15),
                 child: Text(
-                  "Email : " + user.email!,
+                  // "Email : " + user.email!,
+                  // style: TextStyle(
+                  //     color: Color(0xFF273A48),
+                  //     fontSize: 20,
+                  //     fontWeight: FontWeight.bold),
+
+                  "Email : arainama@gmail.com",
                   style: TextStyle(
                       color: Color(0xFF273A48),
                       fontSize: 20,

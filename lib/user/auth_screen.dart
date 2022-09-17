@@ -1,6 +1,12 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:spacom/screens/landing_screen.dart';
 import 'package:spacom/utils/email_pass_signin.dart';
@@ -29,6 +35,79 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
   final signin_email_controller = TextEditingController();
   final signin_pass_controller = TextEditingController();
 
+  PlatformFile? pickedFile;
+  late UploadTask uploadTask;
+  late String urlDownload, bookCover;
+
+  Future uploadFile() async {
+    // if (pickedFile == null) {
+    //   ScaffoldMessenger.of(context)
+    //       .showSnackBar(SnackBar(content: Text("Please Pick a File First..")));
+    // } else
+    if (signun_email_controller.text.isEmpty ||
+        signun_pass_controller.text.isEmpty ||
+        signun_username_controller.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Please Fill All Fields First..")));
+    } else {
+      // final bookCoverpath = 'UserData/Images/${pickedFile!.name}';
+      // final bookCoverfile = File(pickedFile!.path!);
+
+      // final coverref = FirebaseStorage.instance.ref().child(bookCoverpath);
+      // uploadTask = coverref.putFile(bookCoverfile);
+
+      // final snapshot = await uploadTask.whenComplete(() {});
+
+      // urlDownload = await snapshot.ref.getDownloadURL();
+
+      // print('downLoad Like: $urlDownload');
+
+      String genderText;
+      if (isMale == true) {
+        genderText = "Male";
+      } else {
+        genderText = "Female";
+      }
+
+      UserCredential user_data = await _auth.createUserWithEmailAndPassword(
+          email: signun_email_controller.text,
+          password: signun_pass_controller.text);
+
+      Map<String, dynamic> date = {
+        "UserName": signun_username_controller.text,
+        "UserEmail": signun_email_controller.text,
+        "UserPass": signun_pass_controller.text,
+        "UserGender": genderText.toString(),
+        "UserID": user_data.user!.uid.toString()
+
+        // "UserImageURL": urlDownload.toString(),
+
+        // "UserImage": bookCover,
+      };
+
+      FirebaseFirestore.instance
+          .collection("UserData")
+          .doc(user_data.user!.uid)
+          .set(date);
+
+      setState(() {
+        signun_email_controller.clear();
+        signun_pass_controller.clear();
+        signun_username_controller.clear();
+        // pickedFile == null;
+      });
+    }
+  }
+
+  Future selectFile() async {
+    final result = await FilePicker.platform.pickFiles();
+    if (result == null) return;
+
+    setState(() {
+      pickedFile = result.files.first;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,14 +121,14 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
             child: Container(
               height: 300,
               child: Container(
-                padding: EdgeInsets.only(top: 90, left: 20),
+                padding: EdgeInsets.only(top: 50, left: 20),
                 color: Color(0xFF3b5999).withOpacity(.85),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     RichText(
                       text: TextSpan(
-                        text: "Welcome to SPA",
+                        text: "Welcome to Spacom",
                         style: TextStyle(
                           fontSize: 25,
                           letterSpacing: 2,
@@ -80,11 +159,11 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
           AnimatedPositioned(
             duration: Duration(milliseconds: 700),
             curve: Curves.bounceInOut,
-            top: isSignupScreen ? 180 : 200,
+            top: isSignupScreen ? 130 : 130,
             child: AnimatedContainer(
               duration: Duration(milliseconds: 700),
               curve: Curves.bounceInOut,
-              height: isSignupScreen ? 380 : 250,
+              height: isSignupScreen ? 370 : 260,
               padding: EdgeInsets.all(20),
               width: MediaQuery.of(context).size.width - 40,
               margin: EdgeInsets.symmetric(horizontal: 20),
@@ -180,10 +259,13 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      buildTextButton(Icons.facebook_outlined, "Facebook",
-                          App_Colors_Here.facebookColor),
-                      buildTextButton(Icons.account_circle_outlined, "Google",
-                          App_Colors_Here.googleColor),
+                      buildFacebookTextButton(Icons.facebook_outlined,
+                          "Facebook", App_Colors_Here.facebookColor),
+                      buildGoogleTextButton(
+                        Icons.account_circle_outlined,
+                        "Google",
+                        App_Colors_Here.googleColor,
+                      )
                     ],
                   ),
                 )
@@ -238,7 +320,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
 
   Container buildSignupSection() {
     return Container(
-      margin: EdgeInsets.only(top: 20),
+      margin: EdgeInsets.only(top: 10),
       child: Column(
         children: [
           buildTextField(Icons.account_circle_outlined, "User Name", false,
@@ -327,52 +409,163 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
               ],
             ),
           ),
-          Container(
-            width: 200,
-            margin: EdgeInsets.only(top: 20),
-            child: RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                  text: "By pressing 'Submit' you agree to our ",
-                  style: TextStyle(color: App_Colors_Here.textColor2),
-                  children: [
-                    TextSpan(
-                      //recognizer: ,
-                      text: "term & conditions",
-                      style: TextStyle(color: Colors.orange),
-                    ),
-                  ]),
+          GestureDetector(
+            onTap: () {
+              _showMyDialog(
+                  "Privacy Policies",
+                  "Read Carefully",
+                  "The exact contents of a certain privacy policy will depend upon the applicable law and may need to address requirements across geographical boundaries and legal jurisdictions. Most countries have own legislation and guidelines of who is covered, what information can be collected, and what it can be used for. In general, data protection laws in Europe cover the private sector, as well as the public sector. Their privacy laws apply not only to government operations but also to private enterprises and commercial transactions.",
+                  "I am agree");
+            },
+            child: Container(
+              width: 200,
+              margin: EdgeInsets.only(top: 20),
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                    text: "By pressing 'Submit' you agree to our ",
+                    style: TextStyle(color: App_Colors_Here.textColor2),
+                    children: [
+                      TextSpan(
+                        //recognizer: ,
+                        text: "term & conditions",
+                        style: TextStyle(color: Colors.orange),
+                      ),
+                    ]),
+              ),
             ),
           ),
+          // Padding(
+          //   padding: const EdgeInsets.all(10.0),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       if (pickedFile == null) ...[
+          //         Text(
+          //           // overflow: TextOverflow.fade,
+          //           // maxLines: 1,
+          //           softWrap: true,
+          //           "Please Pick a Book Cover ...",
+          //           // style: TextStyle(fontSize: 15, color: Colors.white),
+          //         ),
+          //       ] else if (pickedFile != null) ...[
+          //         Text(
+          //           // overflow: TextOverflow.fade,
+          //           // maxLines: 1,
+          //           softWrap: true,
+          //           "File: ${pickedFile?.name}",
+          //           // style: TextStyle(fontSize: 15, color: Colors.white),
+          //         ),
+          //       ],
+          //       ElevatedButton(
+          //           onPressed: () {
+          //             selectFile();
+          //           },
+          //           child: Text("Pick Image"))
+          //     ],
+          //   ),
+          // )
         ],
       ),
     );
   }
 
-  TextButton buildTextButton(
-      IconData icon, String title, Color backgroundColor) {
+  TextButton buildFacebookTextButton(
+    IconData icon,
+    String title,
+    Color backgroundColor,
+  ) {
     return TextButton(
       onPressed: () async {
-// Google Sign In Method Here............
+        final result = await FacebookAuth.i
+            .login(permissions: ["public_profile", "email"]);
 
-        // final provider =
-        //     Provider.of<GoogleSignInProvider>(context, listen: false);
-        // provider.googleSignin();
+        if (result.status == LoginStatus.success) {
+          final userData = await FacebookAuth.i.getUserData(
+            fields: "email,name",
+          );
 
-//Facebook Sign IN Method Here .......................
-        // final result = await FacebookAuth.i
-        //     .login(permissions: ["public_profile", "email"]);
-
-        // if (result.status == LoginStatus.success) {
-        //   final userData = await FacebookAuth.i.getUserData(
-        //     fields: "email,name",
-        //   );
-
-        //   setState(() {
-        //     _userData = userData;
-        //   });
-        // }
+          setState(() {
+            _userData = userData;
+          });
+        }
       },
+
+// Google Sign In Method Here.....
+
+      // final provider =
+      //     Provider.of<GoogleSignInProvider>(context, listen: false);
+      // provider.googleSignin();
+
+//Facebook Sign IN Method Here ......
+      // final result = await FacebookAuth.i
+      //     .login(permissions: ["public_profile", "email"]);
+
+      // if (result.status == LoginStatus.success) {
+      //   final userData = await FacebookAuth.i.getUserData(
+      //     fields: "email,name",
+      //   );
+
+      //   setState(() {
+      //     _userData = userData;
+      //   });
+      // }
+
+      style: TextButton.styleFrom(
+          side: BorderSide(width: 1, color: Colors.grey),
+          minimumSize: Size(145, 40),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          primary: Colors.white,
+          backgroundColor: backgroundColor),
+      child: Row(
+        children: [
+          Icon(
+            icon,
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          Text(
+            title,
+          )
+        ],
+      ),
+    );
+  }
+
+  TextButton buildGoogleTextButton(
+    IconData icon,
+    String title,
+    Color backgroundColor,
+  ) {
+    return TextButton(
+      onPressed: () {
+        final provider =
+            Provider.of<GoogleSignInProvider>(context, listen: false);
+        provider.googleSignin();
+      },
+
+// Google Sign In Method Here.....
+
+      // final provider =
+      //     Provider.of<GoogleSignInProvider>(context, listen: false);
+      // provider.googleSignin();
+
+//Facebook Sign IN Method Here ......
+      // final result = await FacebookAuth.i
+      //     .login(permissions: ["public_profile", "email"]);
+
+      // if (result.status == LoginStatus.success) {
+      //   final userData = await FacebookAuth.i.getUserData(
+      //     fields: "email,name",
+      //   );
+
+      //   setState(() {
+      //     _userData = userData;
+      //   });
+      // }
+
       style: TextButton.styleFrom(
           side: BorderSide(width: 1, color: Colors.grey),
           minimumSize: Size(145, 40),
@@ -400,7 +593,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
     return AnimatedPositioned(
       duration: Duration(milliseconds: 700),
       curve: Curves.bounceInOut,
-      top: isSignupScreen ? 500 : 400,
+      top: isSignupScreen ? 440 : 320,
       right: 0,
       left: 0,
       child: Center(
@@ -435,7 +628,34 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                             offset: Offset(0, 1))
                       ]),
                   child: GestureDetector(
-                    onTap: () {
+                    onTap: () async {
+                      if (isSignupScreen == true) {
+                        uploadFile();
+                      } else {
+                        _auth.signInWithEmailAndPassword(
+                            email: signin_email_controller.text,
+                            password: signin_pass_controller.text);
+
+                        if (signin_email_controller.text.isNotEmpty ||
+                            signin_pass_controller.text.isNotEmpty) {
+                          // logging in user with email and password
+                          await _auth.signInWithEmailAndPassword(
+                            email: signin_email_controller.text,
+                            password: signin_pass_controller.text,
+                          );
+
+                          const snackBar = SnackBar(
+                            content: Text('Success'),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        } else {
+                          const snackBar = SnackBar(
+                            content: Text('Please enter all the fields'),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+                      }
+
                       //SignUP Method Here
 
                       // AuthenticationHelper()
@@ -479,6 +699,11 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                       //     ));
                       //   }
                       // });
+
+                      // Navigator.pushReplacement(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => Main_Screen()));
                     },
                     child: Icon(
                       Icons.arrow_forward,
@@ -520,4 +745,54 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
       ),
     );
   }
+
+  Future<void> _showMyDialog(
+      String title, String msg, String brief, String option) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(msg),
+                Text(brief),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(option),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+facebookSignIn() async {
+//Facebook Sign IN Method Here .......................
+  final result =
+      await FacebookAuth.i.login(permissions: ["public_profile", "email"]);
+
+  if (result.status == LoginStatus.success) {
+    final userData = await FacebookAuth.i.getUserData(
+      fields: "email,name",
+    );
+
+    // _userData = userData;
+
+  }
+}
+
+mygoogleSignIn(BuildContext context) {
+  // Google Sign In Method Here....
+  final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
+  provider.googleSignin();
 }

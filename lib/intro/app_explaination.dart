@@ -34,9 +34,10 @@ class App_Explaination extends StatelessWidget {
     return SafeArea(
       child: IntroductionScreen(
         globalBackgroundColor: Colors.white,
-        back: const Text("Back",style: TextStyle(color: Color(0xFF3B5999))),
-        next: const Text("Next",style: TextStyle(color: Colors.orangeAccent)),
-        done: const Text("Go to Home",style: TextStyle(color: Colors.orangeAccent)),
+        back: const Text("Back", style: TextStyle(color: Color(0xFF3B5999))),
+        next: const Text("Next", style: TextStyle(color: Colors.orangeAccent)),
+        done: const Text("Go to Home",
+            style: TextStyle(color: Colors.orangeAccent)),
         dotsDecorator: DotsDecorator(
             size: const Size.square(10.0),
             activeSize: const Size(20.0, 10.0),
@@ -44,16 +45,13 @@ class App_Explaination extends StatelessWidget {
             activeColor: Colors.orangeAccent,
             spacing: const EdgeInsets.symmetric(horizontal: 3.0),
             activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25.0)
-            )
-        ),
+                borderRadius: BorderRadius.circular(25.0))),
         onDone: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => LoginSignupScreen()),
           );
         },
-
         showBackButton: true,
         pages: getPages(),
       ),
