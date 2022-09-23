@@ -184,8 +184,7 @@ class _Detials_OrderState extends State<Detials_Order> {
                               padding: const EdgeInsets.only(right: 5),
                               child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => Main_Screen()));
+                                  Navigator.pop(context);
                                 },
                                 style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(

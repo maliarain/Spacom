@@ -17,6 +17,7 @@ class _Favourite_ShapeState extends State<Favourite_Shape> {
             .push(MaterialPageRoute(builder: (context) => Detials_Order()));
       },
       child: Card(
+        elevation: 5,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(25))),
         child: Padding(

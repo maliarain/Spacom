@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:spacom/shapes/booked.dart';
 import 'package:spacom/shapes/completed.dart';
@@ -29,14 +31,17 @@ class _Booking_ScreenState extends State<Booking_Screen> {
                 indicatorSize: TabBarIndicatorSize.label,
                 labelColor: Colors.black,
                 indicator: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: Colors.blue[200]),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20)),
+                    color: Colors.white),
                 tabs: [
                   Tab(
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
-                          border: Border.all(color: Colors.black, width: 1)),
+                          border:
+                              Border.all(color: Colors.transparent, width: 1)),
                       child: Align(
                         alignment: Alignment.center,
                         child: Text("Booked"),
@@ -47,7 +52,8 @@ class _Booking_ScreenState extends State<Booking_Screen> {
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
-                          border: Border.all(color: Colors.black, width: 1)),
+                          border:
+                              Border.all(color: Colors.transparent, width: 1)),
                       child: Align(
                         alignment: Alignment.center,
                         child: Text("Completed"),

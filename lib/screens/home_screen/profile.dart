@@ -90,6 +90,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                       "I am agree");
                 },
                 child: Card(
+                  elevation: 5,
                   shadowColor: Colors.black,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
@@ -148,6 +149,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                   await FlutterEmailSender.send(sendEmail);
                 },
                 child: Card(
+                  elevation: 5,
                   shadowColor: Colors.black,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
@@ -198,6 +200,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                   );
                 },
                 child: Card(
+                  elevation: 5,
                   shadowColor: Colors.black,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
@@ -245,6 +248,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                   await Share.share("Download this amazing app");
                 },
                 child: Card(
+                  elevation: 5,
                   shadowColor: Colors.black,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
