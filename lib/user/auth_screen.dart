@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,8 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
+import 'package:spacom/models/user_data.dart';
 import 'package:spacom/screens/landing_screen.dart';
 import 'package:spacom/utils/email_pass_signin.dart';
+import 'package:spacom/utils/facebook_auth.dart';
 import 'package:spacom/utils/google_sign_in.dart';
 import '../utils/Things_We_Want.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -38,6 +39,8 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
   PlatformFile? pickedFile;
   late UploadTask uploadTask;
   late String urlDownload, bookCover;
+  late HttpClient http;
+  late Map userProfile;
 
   Future uploadFile() async {
     // if (pickedFile == null) {
@@ -52,14 +55,10 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
     } else {
       // final bookCoverpath = 'UserData/Images/${pickedFile!.name}';
       // final bookCoverfile = File(pickedFile!.path!);
-
       // final coverref = FirebaseStorage.instance.ref().child(bookCoverpath);
       // uploadTask = coverref.putFile(bookCoverfile);
-
       // final snapshot = await uploadTask.whenComplete(() {});
-
       // urlDownload = await snapshot.ref.getDownloadURL();
-
       // print('downLoad Like: $urlDownload');
 
       String genderText;
@@ -81,7 +80,6 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
         "UserID": user_data.user!.uid.toString()
 
         // "UserImageURL": urlDownload.toString(),
-
         // "UserImage": bookCover,
       };
 
@@ -96,6 +94,8 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
         signun_username_controller.clear();
         // pickedFile == null;
       });
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => Main_Screen()));
     }
   }
 
@@ -482,12 +482,34 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
 
         if (result.status == LoginStatus.success) {
           final userData = await FacebookAuth.i.getUserData(
-            fields: "email,name",
+            fields: "email,name,id,picture",
           );
 
-          setState(() {
+          setState(() async {
+            String fbname, fbemail, fbpicture, fbuid;
             _userData = userData;
+            fbname = _userData?["name"];
+            fbemail = _userData?["email"];
+            fbpicture = _userData?["picture"]["data"]["url"];
+
+            UserCredential user_data =
+                await _auth.createUserWithEmailAndPassword(
+                    email: fbemail, password: "randompass");
+
+            Map<String, dynamic> date = {
+              "UserName": fbname,
+              "UserEmail": fbemail,
+              "UserPicture": fbpicture,
+            };
+
+            FirebaseFirestore.instance
+                .collection("UserData")
+                .doc(user_data.user!.uid)
+                .set(date);
           });
+
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => Main_Screen()));
         }
       },
 
@@ -543,24 +565,43 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
       onPressed: () {
         final provider =
             Provider.of<GoogleSignInProvider>(context, listen: false);
-        provider.googleSignin();
+        provider.googleSignin().whenComplete(() async {
+          // String? guname, guemail, gupicture;
+
+          // guname = provider.googleSignIn.currentUser!.displayName;
+          // guemail = provider.googleSignIn.currentUser!.email;
+          // gupicture = provider.googleSignIn.currentUser!.photoUrl;
+
+          // UserCredential user_data = await _auth.createUserWithEmailAndPassword(
+          //     email: guemail, password: "randompass");
+
+          // Map<String, dynamic> date = {
+          //   "UserName": guname,
+          //   "UserEmail": guemail,
+          //   "UserPicture": gupicture,
+          // };
+
+          // FirebaseFirestore.instance
+          //     .collection("UserData")
+          //     .doc(user_data.user!.uid)
+          //     .set(date);
+
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => Main_Screen()));
+        });
       },
 
 // Google Sign In Method Here.....
-
       // final provider =
       //     Provider.of<GoogleSignInProvider>(context, listen: false);
       // provider.googleSignin();
-
 //Facebook Sign IN Method Here ......
       // final result = await FacebookAuth.i
       //     .login(permissions: ["public_profile", "email"]);
-
       // if (result.status == LoginStatus.success) {
       //   final userData = await FacebookAuth.i.getUserData(
       //     fields: "email,name",
       //   );
-
       //   setState(() {
       //     _userData = userData;
       //   });
@@ -643,11 +684,13 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                             email: signin_email_controller.text,
                             password: signin_pass_controller.text,
                           );
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => Main_Screen()));
 
-                          const snackBar = SnackBar(
-                            content: Text('Success'),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          // const snackBar = SnackBar(
+                          //   content: Text('Success'),
+                          // );
+                          // ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         } else {
                           const snackBar = SnackBar(
                             content: Text('Please enter all the fields'),
@@ -776,23 +819,19 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
   }
 }
 
-facebookSignIn() async {
-//Facebook Sign IN Method Here .......................
-  final result =
-      await FacebookAuth.i.login(permissions: ["public_profile", "email"]);
-
-  if (result.status == LoginStatus.success) {
-    final userData = await FacebookAuth.i.getUserData(
-      fields: "email,name",
-    );
-
-    // _userData = userData;
-
-  }
-}
-
-mygoogleSignIn(BuildContext context) {
-  // Google Sign In Method Here....
-  final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
-  provider.googleSignin();
-}
+// facebookSignIn() async {
+// //Facebook Sign IN Method Here .......................
+//   final result =
+//       await FacebookAuth.i.login(permissions: ["public_profile", "email"]);
+//   if (result.status == LoginStatus.success) {
+//     final userData = await FacebookAuth.i.getUserData(
+//       fields: "email,name",
+//     );
+//     // _userData = userData;
+//   }
+// }
+// mygoogleSignIn(BuildContext context) {
+//   // Google Sign In Method Here....
+//   final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
+//   provider.googleSignin();
+// }

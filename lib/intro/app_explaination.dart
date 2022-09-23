@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:spacom/screens/landing_screen.dart';
 import 'package:spacom/user/auth_screen.dart';
 
 class App_Explaination extends StatelessWidget {
@@ -47,10 +50,17 @@ class App_Explaination extends StatelessWidget {
             activeShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(25.0))),
         onDone: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => LoginSignupScreen()),
-          );
+          if (FirebaseAuth.instance.currentUser != null) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Main_Screen()),
+            );
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginSignupScreen()),
+            );
+          }
         },
         showBackButton: true,
         pages: getPages(),

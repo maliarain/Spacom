@@ -1,14 +1,28 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:spacom/screens/home_screen/detials_order.dart';
 
 class Home_Shape extends StatefulWidget {
-  const Home_Shape({Key? key}) : super(key: key);
+  const Home_Shape({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<Home_Shape> createState() => _Home_ShapeState();
 }
 
 class _Home_ShapeState extends State<Home_Shape> {
+  List<String> docsIDs = [];
+
+  Future getUserIDs() async {
+    await FirebaseFirestore.instance
+        .collection('UserData')
+        .get()
+        .then((snapshot) => snapshot.docs.forEach((document) {
+              docsIDs.add(document.reference.id);
+            }));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -45,11 +59,24 @@ class _Home_ShapeState extends State<Home_Shape> {
                     )),
                 Positioned(
                     top: 20,
-                    left: 100,
-                    child: Text(
-                      "User Interfeace Design",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    left: 200,
+                    child: Expanded(
+                      child: FutureBuilder(
+                          future: getUserIDs(),
+                          builder: ((context, snapshot) {
+                            return ListView.builder(
+                                itemCount: docsIDs.length,
+                                itemBuilder: ((context, index) {
+                                  return ListTile(
+                                    title: Text(
+                                      docsIDs[index],
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  );
+                                }));
+                          })),
                     )),
                 Positioned(
                     top: 60,

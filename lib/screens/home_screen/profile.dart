@@ -2,9 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:spacom/screens/home_screen/setting.dart';
+import 'package:spacom/user/auth_screen.dart';
 import 'package:spacom/utils/Things_We_Want.dart';
 import 'package:spacom/utils/google_sign_in.dart';
 
@@ -16,7 +18,17 @@ class Profile_Screen extends StatefulWidget {
 }
 
 class _Profile_ScreenState extends State<Profile_Screen> {
+  bool isGoogle = false;
+  bool isFacebk = false;
+  bool fireUser = false;
+
   final user = FirebaseAuth.instance.currentUser!;
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  get firebase_user => _auth.currentUser;
+
+  final FacebookAuth fbauth = FacebookAuth.instance;
+  get fbuser => fbauth;
 
   @override
   Widget build(BuildContext context) {
@@ -31,31 +43,34 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                 height: 130,
                 width: 130,
                 child: CircleAvatar(
-                    radius: 100,
-                    backgroundImage: (() {
-                      if (user == null) {
-                        Image.asset("assets/images/barbar.jpg");
-                      } else {
-                        NetworkImage(user.photoURL!);
-                      }
-                    }())),
+                  radius: 100,
+                  backgroundImage: NetworkImage(
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkgxcV04dhrO3ubYUg5U9g8DIzbiqLHwsHfQ&usqp=CAU"),
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.all(15),
-                child: Text(
-                  // "Email : " + user.email!,
+                  padding: const EdgeInsets.all(15),
+                  child:
+                      // Text(
+                      Text(
+                    "Email: ",
+                    style: TextStyle(
+                        color: Color(0xFF273A48),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  )
                   // style: TextStyle(
                   //     color: Color(0xFF273A48),
                   //     fontSize: 20,
                   //     fontWeight: FontWeight.bold),
 
-                  "Email : arainama@gmail.com",
-                  style: TextStyle(
-                      color: Color(0xFF273A48),
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
+                  // "Email : arainama@gmail.com",
+                  //   style: TextStyle(
+                  //       color: Color(0xFF273A48),
+                  //       fontSize: 20,
+                  //       fontWeight: FontWeight.bold),
+                  // ),
+                  ),
               // App_Things.getProfileButtions(
               //     Icons.privacy_tip_outlined, "Privacy"),
               // App_Things.getProfileButtions(Icons.history, "Purchase History"),
@@ -272,69 +287,62 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                   ),
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  final provider =
-                      Provider.of<GoogleSignInProvider>(context, listen: false);
-                  provider.googleLogOut();
-                },
-                child: Card(
-                  shadowColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(5),
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: Icon(Icons.logout,
-                                    color: Colors.blueAccent, size: 40),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 15),
-                              child: Text("Logout",
-                                  style: TextStyle(fontSize: 20)),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 15),
-                            child: Icon(
-                              Icons.arrow_forward_ios,
-                              color: Colors.blueAccent,
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
+              // GestureDetector(
+              //   onTap: () {
+              //     final provider =
+              //         Provider.of<GoogleSignInProvider>(context, listen: false);
+              //     provider.googleLogOut();
+              //     Navigator.of(context).push(MaterialPageRoute(
+              //         builder: (context) => LoginSignupScreen()));
+              //   },
+              //   child: Card(
+              //     shadowColor: Colors.black,
+              //     shape: RoundedRectangleBorder(
+              //         borderRadius: BorderRadius.circular(30)),
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //       children: [
+              //         Padding(
+              //           padding: const EdgeInsets.all(5.0),
+              //           child: Row(
+              //             children: [
+              //               Padding(
+              //                 padding: const EdgeInsets.all(5),
+              //                 child: Padding(
+              //                   padding: const EdgeInsets.only(left: 8.0),
+              //                   child: Icon(Icons.logout,
+              //                       color: Colors.blueAccent, size: 40),
+              //                 ),
+              //               ),
+              //               Padding(
+              //                 padding: const EdgeInsets.only(left: 15),
+              //                 child: Text("Logout",
+              //                     style: TextStyle(fontSize: 20)),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //         Row(
+              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //           children: [
+              //             Padding(
+              //               padding: const EdgeInsets.only(right: 15),
+              //               child: Icon(
+              //                 Icons.arrow_forward_ios,
+              //                 color: Colors.blueAccent,
+              //               ),
+              //             ),
+              //           ],
+              //         )
+              //       ],
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),
       ),
     );
-  }
-
-  _clicked() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      const snackBar = SnackBar(
-        content: Text('Yay! A SnackBar!'),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    });
   }
 
   Future<void> _showMyDialog(
@@ -364,5 +372,45 @@ class _Profile_ScreenState extends State<Profile_Screen> {
         );
       },
     );
+  }
+
+  showEmail() {
+    if (_auth != null) {
+      return Text(
+        "Email: " + user.email!,
+        style: TextStyle(
+            color: Color(0xFF273A48),
+            fontSize: 20,
+            fontWeight: FontWeight.bold),
+      );
+    } else {
+      return Text(
+        "please Sign In",
+        style: TextStyle(
+            color: Color(0xFF273A48),
+            fontSize: 20,
+            fontWeight: FontWeight.bold),
+      );
+    }
+  }
+
+  showImage() {
+    if (_auth != null) {
+      return SizedBox(
+          height: 130,
+          width: 130,
+          child: CircleAvatar(
+              radius: 100, backgroundImage: NetworkImage(user.photoURL!)));
+    } else {
+      return SizedBox(
+        height: 130,
+        width: 130,
+        child: CircleAvatar(
+          radius: 100,
+          backgroundImage: NetworkImage(
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkgxcV04dhrO3ubYUg5U9g8DIzbiqLHwsHfQ&usqp=CAU"),
+        ),
+      );
+    }
   }
 }

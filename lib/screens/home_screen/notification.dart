@@ -12,6 +12,10 @@ class _Favourite_ScreenState extends State<Favourite_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text("Notifications"),
+      ),
       backgroundColor: Colors.white,
       body: ListView.builder(
         itemCount: 15,

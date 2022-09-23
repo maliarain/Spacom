@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:spacom/models/message_model.dart';
 import 'package:spacom/models/user_model.dart';
@@ -14,137 +16,145 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   _chatBubble(Message message, bool isMe, bool isSameUser) {
     if (isMe) {
-      return Column(
-        children: <Widget>[
-          Container(
-            alignment: Alignment.topRight,
-            child: Container(
-              constraints: BoxConstraints(
-                maxWidth: MediaQuery.of(context).size.width * 0.80,
-              ),
-              padding: EdgeInsets.all(10),
-              margin: EdgeInsets.symmetric(vertical: 10),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 5,
+      return Scaffold(
+        appBar: AppBar(
+          title: Text("Char Screen"),
+        ),
+        body: Column(
+          children: <Widget>[
+            Container(
+              alignment: Alignment.topRight,
+              child: Container(
+                constraints: BoxConstraints(
+                  maxWidth: MediaQuery.of(context).size.width * 0.80,
+                ),
+                padding: EdgeInsets.all(10),
+                margin: EdgeInsets.symmetric(vertical: 10),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                    ),
+                  ],
+                ),
+                child: Text(
+                  message.text,
+                  style: TextStyle(
+                    color: Colors.white,
                   ),
-                ],
-              ),
-              child: Text(
-                message.text,
-                style: TextStyle(
-                  color: Colors.white,
                 ),
               ),
             ),
-          ),
-          !isSameUser
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    Text(
-                      message.time,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.black45,
+            !isSameUser
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        message.time,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.black45,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                          ),
-                        ],
+                      SizedBox(
+                        width: 10,
                       ),
-                      child: CircleAvatar(
-                        radius: 15,
-                        backgroundImage: AssetImage(message.sender.imageUrl),
+                      Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                            ),
+                          ],
+                        ),
+                        child: CircleAvatar(
+                          radius: 15,
+                          backgroundImage: AssetImage(message.sender.imageUrl),
+                        ),
                       ),
-                    ),
-                  ],
-                )
-              : Container(
-                  child: null,
-                ),
-        ],
+                    ],
+                  )
+                : Container(
+                    child: null,
+                  ),
+          ],
+        ),
       );
     } else {
-      return Column(
-        children: <Widget>[
-          Container(
-            alignment: Alignment.topLeft,
-            child: Container(
-              constraints: BoxConstraints(
-                maxWidth: MediaQuery.of(context).size.width * 0.80,
-              ),
-              padding: EdgeInsets.all(10),
-              margin: EdgeInsets.symmetric(vertical: 10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 5,
+      return Scaffold(
+        appBar: AppBar(title: Text("Title Here")),
+        body: Column(
+          children: <Widget>[
+            Container(
+              alignment: Alignment.topLeft,
+              child: Container(
+                constraints: BoxConstraints(
+                  maxWidth: MediaQuery.of(context).size.width * 0.80,
+                ),
+                padding: EdgeInsets.all(10),
+                margin: EdgeInsets.symmetric(vertical: 10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                    ),
+                  ],
+                ),
+                child: Text(
+                  message.text,
+                  style: TextStyle(
+                    color: Colors.black54,
                   ),
-                ],
-              ),
-              child: Text(
-                message.text,
-                style: TextStyle(
-                  color: Colors.black54,
                 ),
               ),
             ),
-          ),
-          !isSameUser
-              ? Row(
-                  children: <Widget>[
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                          ),
-                        ],
+            !isSameUser
+                ? Row(
+                    children: <Widget>[
+                      Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                            ),
+                          ],
+                        ),
+                        child: CircleAvatar(
+                          radius: 15,
+                          backgroundImage: AssetImage(message.sender.imageUrl),
+                        ),
                       ),
-                      child: CircleAvatar(
-                        radius: 15,
-                        backgroundImage: AssetImage(message.sender.imageUrl),
+                      SizedBox(
+                        width: 10,
                       ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      message.time,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.black45,
+                      Text(
+                        message.time,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.black45,
+                        ),
                       ),
-                    ),
-                  ],
-                )
-              : Container(
-                  child: null,
-                ),
-        ],
+                    ],
+                  )
+                : Container(
+                    child: null,
+                  ),
+          ],
+        ),
       );
     }
   }

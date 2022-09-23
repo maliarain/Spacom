@@ -22,24 +22,21 @@ class _Booking_ScreenState extends State<Booking_Screen> {
             automaticallyImplyLeading: false,
             title: Text(
               "Bookings Category",
-              style: TextStyle(color: Colors.blueAccent),
             ),
-            centerTitle: true,
-            backgroundColor: Colors.white,
             elevation: 0,
             bottom: TabBar(
-                unselectedLabelColor: Colors.blueAccent,
+                unselectedLabelColor: Colors.white,
                 indicatorSize: TabBarIndicatorSize.label,
+                labelColor: Colors.black,
                 indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
-                    color: Colors.blueAccent),
+                    color: Colors.blue[200]),
                 tabs: [
                   Tab(
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
-                          border:
-                              Border.all(color: Colors.blueAccent, width: 1)),
+                          border: Border.all(color: Colors.black, width: 1)),
                       child: Align(
                         alignment: Alignment.center,
                         child: Text("Booked"),
@@ -50,8 +47,7 @@ class _Booking_ScreenState extends State<Booking_Screen> {
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
-                          border:
-                              Border.all(color: Colors.blueAccent, width: 1)),
+                          border: Border.all(color: Colors.black, width: 1)),
                       child: Align(
                         alignment: Alignment.center,
                         child: Text("Completed"),
