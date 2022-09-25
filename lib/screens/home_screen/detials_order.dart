@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:spacom/models/message_model.dart';
+import 'package:spacom/screens/home_screen/chat_screen.dart';
 import 'package:spacom/screens/landing_screen.dart';
 
 class Detials_Order extends StatefulWidget {
@@ -9,6 +11,8 @@ class Detials_Order extends StatefulWidget {
 }
 
 class _Detials_OrderState extends State<Detials_Order> {
+  final Message chat = chats[1];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,14 +21,30 @@ class _Detials_OrderState extends State<Detials_Order> {
         child: SafeArea(
           child: Column(
             children: [
-              SizedBox(
-                height: 200,
-                width: double.infinity,
-                child: Image.asset(
-                  "assets/images/barbar.jpg",
-                  fit: BoxFit.cover,
+              Stack(children: <Widget>[
+                Positioned(
+                  child: SizedBox(
+                    height: 200,
+                    width: double.infinity,
+                    child: Image.asset(
+                      "assets/images/barbar.jpg",
+                    ),
+                  ),
                 ),
-              ),
+                Positioned(
+                  top: 20,
+                  left: 20,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: SizedBox(
+                        height: 50,
+                        width: 50,
+                        child: Image.asset("assets/images/backward.png")),
+                  ),
+                ),
+              ]),
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
@@ -36,33 +56,7 @@ class _Detials_OrderState extends State<Detials_Order> {
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "\$25.99",
-                            style: TextStyle(
-                                fontSize: 25, color: Colors.blueAccent),
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "4.3",
-                                style: TextStyle(
-                                    fontSize: 25, color: Colors.blueAccent),
-                              ),
-                              Icon(
-                                Icons.star,
-                                color: Colors.blueAccent,
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(5),
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: Row(
@@ -70,7 +64,7 @@ class _Detials_OrderState extends State<Detials_Order> {
                           children: [
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.only(top: 15),
+                                padding: const EdgeInsets.only(top: 10),
                                 child: Container(
                                   alignment: Alignment.center,
                                   width: MediaQuery.of(context).size.width,
@@ -87,7 +81,7 @@ class _Detials_OrderState extends State<Detials_Order> {
                                   ),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
+                                    children: const [
                                       Text(
                                         "20\$",
                                         style: TextStyle(
@@ -120,7 +114,7 @@ class _Detials_OrderState extends State<Detials_Order> {
                                   ),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
+                                    children: const [
                                       Text(
                                         "2 Hours",
                                         style: TextStyle(
@@ -136,31 +130,42 @@ class _Detials_OrderState extends State<Detials_Order> {
                             Expanded(
                               child: Padding(
                                 padding: const EdgeInsets.only(top: 15),
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(40),
-                                    ),
-                                    border: Border.all(
-                                      width: 1,
-                                      color: Colors.blueAccent,
-                                      style: BorderStyle.solid,
+                                child: GestureDetector(
+                                  onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => ChatScreen(
+                                        user: chat.sender,
+                                      ),
                                     ),
                                   ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "Massage",
-                                        style: TextStyle(
-                                            color: Colors.blueAccent,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(40),
                                       ),
-                                    ],
+                                      border: Border.all(
+                                        width: 1,
+                                        color: Colors.blueAccent,
+                                        style: BorderStyle.solid,
+                                      ),
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: const [
+                                        Text(
+                                          "Massage",
+                                          style: TextStyle(
+                                              color: Colors.blueAccent,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -171,71 +176,98 @@ class _Detials_OrderState extends State<Detials_Order> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 15),
-                      child: Text(
-                          "Paragraphs are the building blocks of papers. Many students define paragraphs in terms of length: a paragraph is a group of at least five sentences, a paragraph is half a page long, etc. In reality, though, the unity and coherence of ideas among sentences is what constitutes a paragraph. A paragraph is defined as “a group of sentences or a single sentence that forms a unit” (Lunsford and Connors 116). Length and appearance do not determine whether a section in a paper is a paragraph. For instance, in some styles of writing, particularly journalistic styles, a paragraph can be just one sentence long. Ultimately, a paragraph is a sentence or group of sentences that support one main idea. In this handout, we will refer to this as the “controlling idea,” because it controls what happens in the rest of the paragraph. Paragraphs are the building blocks of papers. Many students define paragraphs in terms of length: a paragraph is a group of at least five sentences, a paragraph is half a page long, etc. In reality, though, the unity and coherence of ideas among sentences is what constitutes a paragraph. A paragraph is defined as “a group of sentences or a single sentence that forms a unit” (Lunsford and Connors 116). Length and appearance do not determine whether a section in a paper is a paragraph. For instance, in some styles of writing, particularly journalistic styles, a paragraph can be just one sentence long. Ultimately, a paragraph is a sentence or group of sentences that support one main idea. In this handout, we will refer to this as the “controlling idea,” because it controls what happens in the rest of the paragraph. Paragraphs are the building blocks of papers. Many students define paragraphs in terms of length: a paragraph is a group of at least five sentences, a paragraph is half a page long, etc. In reality, though, the unity and coherence of ideas among sentences is what constitutes a paragraph. A paragraph is defined as “a group of sentences or a single sentence that forms a unit” (Lunsford and Connors 116). Length and appearance do not determine whether a section in a paper is a paragraph. For instance, in some styles of writing, particularly journalistic styles, a paragraph can be just one sentence long. Ultimately, a paragraph is a sentence or group of sentences that support one main idea. In this handout, we will refer to this as the “controlling idea,” because it controls what happens in the rest of the paragraph."),
-                    ),
-                    Align(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 5),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                        Colors.blueAccent)),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(4),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Row(
-                                      children: const [
-                                        Icon(
-                                          Icons.cancel_rounded,
-                                          size: 20,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text(
+                            "Facilities",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 25),
+                          ),
+                          Text(
+                            "• Air Condition • Magazines • Hair Cut\n• Massage • Shaving • Mackup",
+                            style: TextStyle(fontSize: 25),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 10.0),
+                            child: Text(
+                              "About",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 25),
                             ),
-                            Expanded(
-                              child: ElevatedButton(
-                                onPressed: () => 'Null',
-                                style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                        Colors.blueAccent)),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(4),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: const [
-                                        Text(
-                                          'Book Appointment',
-                                          style: TextStyle(fontSize: 20),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 10.0),
+                            child: Text(
+                              "Paragraphsd as “a grrs aper is of the part of the paragraph. Its headquarters are located in Amsterdam. The company operates a partnership programme and has a presence in most European countries, as well as many others throughout Asia, Africa and Oceania. In fiscal year 2019, SPAR achieved €37.1 billion in global sales, which represented a 4.35 percent increase over 2018.",
+                              style: TextStyle(fontSize: 20),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 5),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.blueAccent)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(4),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                children: const [
+                                  Icon(
+                                    Icons.cancel_rounded,
+                                    size: 20,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () => 'Null',
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.blueAccent)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(4),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Text(
+                                    'Book Appointment',
+                                    style: TextStyle(fontSize: 20),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),

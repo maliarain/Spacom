@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, camel_case_types, prefer_const_literals_to_create_immutables
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -36,41 +38,81 @@ class _Profile_ScreenState extends State<Profile_Screen> {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              SizedBox(
-                height: 130,
-                width: 130,
-                child: CircleAvatar(
-                  radius: 100,
-                  backgroundImage: NetworkImage(
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkgxcV04dhrO3ubYUg5U9g8DIzbiqLHwsHfQ&usqp=CAU"),
+              Container(
+                height: 210,
+                width: double.infinity,
+                child: Stack(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(top: 50.0),
+                      child: Card(
+                        elevation: 3,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        color: Colors.blueAccent,
+                        child: Container(),
+                      ),
+                    ),
+                    Positioned(
+                      left: 155,
+                      child: SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: CircleAvatar(
+                          radius: 100,
+                          backgroundImage: NetworkImage(
+                              "https://i.pinimg.com/originals/ea/6c/93/ea6c931c623881ecd29955db118c7742.png"),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                        top: 110,
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Name : Muhammadl Ali",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "Phone : +923053272174",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "Email : arainmali786@gmail.com",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "Location : DHA Phase 4, Karachi",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ))
+                  ],
                 ),
               ),
-              Padding(
-                  padding: const EdgeInsets.all(15),
-                  child:
-                      // Text(
-                      Text(
-                    "Email: ",
-                    style: TextStyle(
-                        color: Color(0xFF273A48),
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  )
-                  // style: TextStyle(
-                  //     color: Color(0xFF273A48),
-                  //     fontSize: 20,
-                  //     fontWeight: FontWeight.bold),
 
-                  // "Email : arainama@gmail.com",
-                  //   style: TextStyle(
-                  //       color: Color(0xFF273A48),
-                  //       fontSize: 20,
-                  //       fontWeight: FontWeight.bold),
-                  // ),
-                  ),
               // App_Things.getProfileButtions(
               //     Icons.privacy_tip_outlined, "Privacy"),
               // App_Things.getProfileButtions(Icons.history, "Purchase History"),
@@ -105,8 +147,11 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                               padding: const EdgeInsets.all(5),
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
-                                child: Icon(Icons.privacy_tip_outlined,
-                                    color: Colors.blueAccent, size: 40),
+                                child: SizedBox(
+                                    height: 50,
+                                    width: 50,
+                                    child: Image.asset(
+                                        "assets/images/privacy.png")),
                               ),
                             ),
                             Padding(
@@ -164,8 +209,11 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                               padding: const EdgeInsets.all(5),
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
-                                child: Icon(Icons.history,
-                                    color: Colors.blueAccent, size: 40),
+                                child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: Image.asset(
+                                        "assets/images/support.png")),
                               ),
                             ),
                             Padding(
@@ -215,8 +263,11 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                               padding: const EdgeInsets.all(5),
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
-                                child: Icon(Icons.settings,
-                                    color: Colors.blueAccent, size: 40),
+                                child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: Image.asset(
+                                        "assets/images/setting.png")),
                               ),
                             ),
                             Padding(
@@ -263,8 +314,12 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                               padding: const EdgeInsets.all(5),
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
-                                child: Icon(Icons.mobile_friendly_sharp,
-                                    color: Colors.blueAccent, size: 40),
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: Image.asset(
+                                      "assets/images/invitefriend.png"),
+                                ),
                               ),
                             ),
                             Padding(

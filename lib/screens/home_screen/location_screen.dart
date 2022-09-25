@@ -13,7 +13,16 @@ class _Location_ScreenState extends State<Location_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+        body: NestedScrollView(
+      floatHeaderSlivers: true,
+      headerSliverBuilder: (context, innerBoxIsScrolled) => [
+        SliverAppBar(
+          floating: true,
+          snap: true,
+          automaticallyImplyLeading: false,
+          title: Text("Messages"),
+        )
+      ],
       body: ListView.builder(
         itemCount: chats.length,
         itemBuilder: (BuildContext context, int index) {
@@ -127,6 +136,6 @@ class _Location_ScreenState extends State<Location_Screen> {
           );
         },
       ),
-    );
+    ));
   }
 }

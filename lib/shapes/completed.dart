@@ -83,7 +83,11 @@ class _Completed_ShapeState extends State<Completed_Shape> {
                             padding: EdgeInsets.all(5.0),
                             child: Row(
                               children: [
-                                Icon(Icons.check),
+                                SizedBox(
+                                    width: 30,
+                                    height: 30,
+                                    child:
+                                        Image.asset("assets/images/check.png")),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5),
                                   child: Text(

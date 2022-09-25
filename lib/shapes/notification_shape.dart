@@ -60,10 +60,10 @@ class _Favourite_ShapeState extends State<Favourite_Shape> {
                     padding: const EdgeInsets.only(right: 10),
                     child: Column(
                       children: [
-                        Icon(
-                          Icons.notifications_active_outlined,
-                          color: Colors.black,
-                        ),
+                        SizedBox(
+                            width: 30,
+                            height: 30,
+                            child: Image.asset("assets/images/ring.png"))
                       ],
                     ),
                   ),

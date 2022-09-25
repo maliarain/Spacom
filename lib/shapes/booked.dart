@@ -84,7 +84,13 @@ class _Booked_ShapeState extends State<Booked_Shape> {
                             padding: EdgeInsets.all(5.0),
                             child: Row(
                               children: [
-                                Icon(Icons.timer_outlined),
+                                SizedBox(
+                                    child: SizedBox(
+                                  height: 25,
+                                  width: 25,
+                                  child:
+                                      Image.asset("assets/images/timmer.png"),
+                                )),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5),
                                   child: Text(
@@ -101,8 +107,11 @@ class _Booked_ShapeState extends State<Booked_Shape> {
                     Padding(
                       padding: const EdgeInsets.only(left: 15),
                       child: Row(
-                        children: const [
-                          Icon(Icons.arrow_forward),
+                        children: [
+                          SizedBox(
+                              height: 30,
+                              width: 30,
+                              child: Image.asset("assets/images/forward.png"))
                         ],
                       ),
                     )

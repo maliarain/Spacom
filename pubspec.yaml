@@ -72,6 +72,15 @@ flutter:
      - assets/images/flutterbudy.png
      - assets/images/fluttterbuddy.png
      - assets/images/profileicon.png
+     - assets/images/check.png
+     - assets/images/forward.png
+     - assets/images/invitefriend.png
+     - assets/images/privacy.png
+     - assets/images/ring.png
+     - assets/images/setting.png
+     - assets/images/support.png
+     - assets/images/timmer.png
+     - assets/images/backward.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
