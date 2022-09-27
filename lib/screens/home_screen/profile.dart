@@ -7,6 +7,7 @@ import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:spacom/screens/home_screen/emailscreen.dart';
 import 'package:spacom/screens/home_screen/setting.dart';
 import 'package:spacom/user/auth_screen.dart';
 import 'package:spacom/utils/Things_We_Want.dart';
@@ -49,11 +50,10 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 50.0),
                       child: Card(
-                        elevation: 3,
+                        elevation: 5,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
                         ),
-                        color: Colors.blueAccent,
                         child: Container(),
                       ),
                     ),
@@ -78,33 +78,29 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                             Text(
                               "Name : Muhammadl Ali",
                               style: TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontSize: 20,
-                                fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
                               "Phone : +923053272174",
                               style: TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontSize: 20,
-                                fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
                               "Email : arainmali786@gmail.com",
                               style: TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontSize: 20,
-                                fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
                               "Location : DHA Phase 4, Karachi",
                               style: TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontSize: 20,
-                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ],
@@ -179,20 +175,20 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                 ),
               ),
               GestureDetector(
-                onTap: () async {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => const SecondRoute()),
-                  // );
-                  final Email sendEmail = Email(
-                    body: 'Your main Problem :',
-                    subject: 'Flutter App',
-                    recipients: ['myflutter@gmail.com'],
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => EmailScreen()),
                   );
-
-                  await FlutterEmailSender.send(sendEmail);
                 },
+                // final Email sendEmail = Email(
+                //   body: 'Your main Problem :',
+                //   subject: 'Flutter App',
+                //   recipients: ['myflutter@gmail.com'],
+                // );
+
+                // await FlutterEmailSender.send(sendEmail);
+                // },
                 child: Card(
                   elevation: 5,
                   shadowColor: Colors.black,

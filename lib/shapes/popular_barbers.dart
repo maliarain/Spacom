@@ -14,7 +14,7 @@ class Popular_Barbar extends StatelessWidget {
               .push(MaterialPageRoute(builder: (context) => Detials_Order()));
         },
         child: Container(
-          height: double.infinity,
+          height: 80,
           width: double.infinity,
           decoration: BoxDecoration(
               color: Color(0xfff9fafc),
@@ -34,7 +34,7 @@ class Popular_Barbar extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "24 Lessons",
+                          "14 Styles",
                           style: TextStyle(fontSize: 15),
                         ),
                         Row(
@@ -42,7 +42,7 @@ class Popular_Barbar extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(right: 5.0),
                               child: Text(
-                                "43",
+                                "4.3",
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold),
                               ),
@@ -57,14 +57,11 @@ class Popular_Barbar extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 125,
-                    width: double.infinity,
-                    child: Image.asset(
-                      "assets/images/barbar.jpg",
-                      fit: BoxFit.fill,
-                      height: double.infinity,
-                      width: double.infinity,
-                      alignment: Alignment.center,
+                    width: 120,
+                    height: 120,
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage('assets/images/barbar.jpg'),
+                      radius: 100,
                     ),
                   ),
                 ]),

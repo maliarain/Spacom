@@ -18,7 +18,7 @@ class _ChatScreenState extends State<ChatScreen> {
     if (isMe) {
       return Scaffold(
         appBar: AppBar(
-          title: Text("Char Screen"),
+          title: Text("Chat Screen"),
         ),
         body: Column(
           children: <Widget>[
@@ -89,7 +89,6 @@ class _ChatScreenState extends State<ChatScreen> {
       );
     } else {
       return Scaffold(
-        appBar: AppBar(title: Text("Title Here")),
         body: Column(
           children: <Widget>[
             Container(

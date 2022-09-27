@@ -58,26 +58,13 @@ class _Home_ShapeState extends State<Home_Shape> {
                       ),
                     )),
                 Positioned(
-                    top: 20,
-                    left: 200,
-                    child: Expanded(
-                      child: FutureBuilder(
-                          future: getUserIDs(),
-                          builder: ((context, snapshot) {
-                            return ListView.builder(
-                                itemCount: docsIDs.length,
-                                itemBuilder: ((context, index) {
-                                  return ListTile(
-                                    title: Text(
-                                      docsIDs[index],
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  );
-                                }));
-                          })),
-                    )),
+                  top: 20,
+                  left: 100,
+                  child: Text(
+                    "Barbar Shop",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ),
                 Positioned(
                     top: 60,
                     left: 100,
@@ -86,7 +73,7 @@ class _Home_ShapeState extends State<Home_Shape> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "24 Lessons",
+                          "12 Stryles",
                           style: TextStyle(fontSize: 15),
                         ),
                         Row(
@@ -94,7 +81,7 @@ class _Home_ShapeState extends State<Home_Shape> {
                             Padding(
                               padding: const EdgeInsets.only(right: 2.0),
                               child: Text(
-                                "43",
+                                "4.3",
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold),
                               ),

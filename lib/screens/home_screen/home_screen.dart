@@ -244,7 +244,7 @@ class _Home_ScreenState extends State<Home_Screen> {
               shrinkWrap: true,
               physics: ClampingScrollPhysics(),
               crossAxisCount: 2,
-              children: List.generate(4, (index) {
+              children: List.generate(8, (index) {
                 return const Popular_Barbar();
               }),
             ),

@@ -43,7 +43,7 @@ class _Favourite_ShapeState extends State<Favourite_Shape> {
                         Text(
                           "Notification",
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                              fontSize: 17, fontWeight: FontWeight.bold),
                         ),
                         Text(
                           "Barbar work experience and things",

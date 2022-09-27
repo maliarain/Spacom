@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spacom/models/message_model.dart';
 import 'package:spacom/screens/home_screen/chat_screen.dart';
+import 'package:spacom/screens/home_screen/payment_screen.dart';
 import 'package:spacom/screens/landing_screen.dart';
 
 class Detials_Order extends StatefulWidget {
@@ -243,7 +244,10 @@ class _Detials_OrderState extends State<Detials_Order> {
                       ),
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: () => 'Null',
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => MyWidget()));
+                          },
                           style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.blueAccent)),

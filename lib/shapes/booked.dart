@@ -105,8 +105,9 @@ class _Booked_ShapeState extends State<Booked_Shape> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 15),
+                      padding: const EdgeInsets.only(left: 5),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
                               height: 30,

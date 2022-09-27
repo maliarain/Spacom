@@ -59,7 +59,7 @@ class _Completed_ShapeState extends State<Completed_Shape> {
                             child: Text(
                               "Hair Cut Shop",
                               style: TextStyle(
-                                  fontSize: 25,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black87),
                             ),
@@ -73,7 +73,7 @@ class _Completed_ShapeState extends State<Completed_Shape> {
                                   child: Text(
                                     "Booking : Ruff Cutting",
                                     style: TextStyle(
-                                        fontSize: 20, color: Colors.black54),
+                                        fontSize: 15, color: Colors.black54),
                                   ),
                                 ),
                               ],
@@ -102,10 +102,13 @@ class _Completed_ShapeState extends State<Completed_Shape> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 30),
+                      padding: const EdgeInsets.only(left: 60),
                       child: Row(
-                        children: const [
-                          Icon(Icons.arrow_forward),
+                        children: [
+                          SizedBox(
+                              height: 30,
+                              width: 30,
+                              child: Image.asset("assets/images/forward.png"))
                         ],
                       ),
                     )
